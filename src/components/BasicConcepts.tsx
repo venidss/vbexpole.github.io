@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 interface BasicConceptsModalProps {
   isOpen: boolean;
   onClose: () => void;
