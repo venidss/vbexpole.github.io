@@ -2,13 +2,21 @@ import './App.css'
 import { useState } from 'react'
 import { BasicConceptsModal } from './components/BasicConcepts'
 import { WindowsFormsModal } from './components/WindowsForms'
+import { ControlStructuresModal } from './components/ControlStructures'
+import { DatabaseProgrammingModal } from './components/DatabaseProgramming'
+import { FunctionsProceduresModal } from './components/FunctionsProcedures'
+import { DebuggingModal } from './components/Debugging'
 
 function App() {
   const [isBasicConceptsOpen, setIsBasicConceptsOpen] = useState(false)
   const [isWindowsFormsOpen, setIsWindowsFormsOpen] = useState(false)
+  const [isControlStructuresOpen, setIsControlStructuresOpen] = useState(false)
+  const [isDatabaseProgrammingOpen, setIsDatabaseProgrammingOpen] = useState(false)
+  const [isFunctionsProceduresOpen, setIsFunctionsProceduresOpen] = useState(false)
+  const [isDebuggingOpen, setIsDebuggingOpen] = useState(false)
 
   return (
-    <div className="h-screen w-screen bg-gradient-to-br from-blue-500 to-purple-600 p-4 overflow-hidden">
+    <div className="h-screen w-screen bg-gradient-to-br from-black-500 to-gray-1000 p-4 overflow-hidden">
       <div className="h-full w-full">
         <div className="text-center mb-8">
           <h1 className="text-5xl font-bold text-white mb-2">VB.NET Learning Hub</h1>
@@ -24,8 +32,18 @@ function App() {
               color="bg-green-400"
               onClick={() => setIsBasicConceptsOpen(true)} 
             />
-            <CategoryButton icon="🔄" title="Control Structures" color="bg-yellow-400" />
-            <CategoryButton icon="🎯" title="Functions & Procedures" color="bg-red-400" />
+            <CategoryButton 
+              icon="🔄" 
+              title="Control Structures" 
+              color="bg-yellow-400"
+              onClick={() => setIsControlStructuresOpen(true)}
+            />
+            <CategoryButton 
+              icon="🎯" 
+              title="Functions & Procedures" 
+              color="bg-red-400"
+              onClick={() => setIsFunctionsProceduresOpen(true)}
+            />
             <CategoryButton icon="🧰" title="OOP Concepts" color="bg-purple-400" />
             <CategoryButton icon="📚" title="Libraries & Modules" color="bg-blue-400" />
           </div>
@@ -38,8 +56,18 @@ function App() {
               color="bg-indigo-400"
               onClick={() => setIsWindowsFormsOpen(true)}
             />
-            <CategoryButton icon="🗃️" title="Database Programming" color="bg-pink-400" />
-            <CategoryButton icon="🔍" title="Debugging" color="bg-orange-400" />
+            <CategoryButton 
+              icon="🗃️" 
+              title="Database Programming" 
+              color="bg-pink-400"
+              onClick={() => setIsDatabaseProgrammingOpen(true)}
+            />
+            <CategoryButton 
+              icon="🔍" 
+              title="Debugging" 
+              color="bg-orange-400"
+              onClick={() => setIsDebuggingOpen(true)}
+            />
             <CategoryButton icon="🛠️" title="Projects" color="bg-teal-400" />
             <CategoryButton icon="🎮" title="Practice Exercises" color="bg-cyan-400" />
           </div>
@@ -52,6 +80,22 @@ function App() {
         <WindowsFormsModal
           isOpen={isWindowsFormsOpen}
           onClose={() => setIsWindowsFormsOpen(false)}
+        />
+        <ControlStructuresModal
+          isOpen={isControlStructuresOpen}
+          onClose={() => setIsControlStructuresOpen(false)}
+        />
+        <DatabaseProgrammingModal
+          isOpen={isDatabaseProgrammingOpen}
+          onClose={() => setIsDatabaseProgrammingOpen(false)}
+        />
+        <FunctionsProceduresModal
+          isOpen={isFunctionsProceduresOpen}
+          onClose={() => setIsFunctionsProceduresOpen(false)}
+        />
+        <DebuggingModal
+          isOpen={isDebuggingOpen}
+          onClose={() => setIsDebuggingOpen(false)}
         />
       </div>
     </div>

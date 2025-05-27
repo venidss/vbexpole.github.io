@@ -11,7 +11,7 @@ export function WindowsFormsModal({ isOpen, onClose }: WindowsFormsModalProps) {
   const tutorials = [
     {
       title: "Introduction to Windows Forms",
-      url: "https://www.youtube.com/embed/OB7YMB3jqHI",
+      url: "https://www.youtube.com/embed/Aq5WXmQQooo?si=uQFCasG-1ohEZ_In",
       description: "Learn the basics of Windows Forms in VB.NET"
     },
     {
