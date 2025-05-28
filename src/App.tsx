@@ -23,8 +23,8 @@ function App() {
 
   return (
     <ErrorBoundary>
-      <Suspense fallback={<div className="h-screen w-screen flex items-center justify-center"><LoadingSpinner size="large" /></div>}>
-        <div className="h-screen w-screen bg-gradient-to-br from-black-500 to-gray-1000 p-4 overflow-hidden">
+      <Suspense fallback={<div className="h-screen w-screen flex items-center justify-center dark:bg-black"><LoadingSpinner size="large" /></div>}>
+        <div className="h-screen w-screen bg-gradient-to-br from-gray-900 to-black p-4 overflow-hidden dark:from-black dark:to-gray-900">
           <div className="h-full w-full">
             <div className="text-center mb-8">
               <h1 className="text-5xl font-bold text-white mb-2">VB.NET Learning Hub</h1>
