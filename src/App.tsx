@@ -24,16 +24,16 @@ function App() {
   return (
     <ErrorBoundary>
       <Suspense fallback={<div className="h-screen w-screen flex items-center justify-center dark:bg-black"><LoadingSpinner size="large" /></div>}>
-        <div className="h-screen w-screen bg-gradient-to-br from-gray-900 to-black p-4 overflow-hidden dark:from-black dark:to-gray-900">
+        <div className="h-screen w-screen bg-gradient-to-br from-gray-900 to-black p-2 sm:p-4 overflow-hidden dark:from-black dark:to-gray-900">
           <div className="h-full w-full">
-            <div className="text-center mb-8">
-              <h1 className="text-5xl font-bold text-white mb-2">VB.NET Learning Hub</h1>
-              <div className="animate-bounce text-yellow-300 text-2xl">🌟</div>
+            <div className="text-center mb-4 sm:mb-8">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-2">VB.NET Learning Hub</h1>
+              <div className="animate-bounce text-yellow-300 text-xl sm:text-2xl">🌟</div>
             </div>
 
-            <div className="grid grid-cols-2 gap-8 px-16">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 px-2 sm:px-8 md:px-16">
               {/* Left Column */}
-              <div className="space-y-6">
+              <div className="space-y-4 sm:space-y-6">
                 <CategoryButton 
                   icon="📝" 
                   title="Basic Concepts" 
@@ -62,7 +62,7 @@ function App() {
               </div>
 
               {/* Right Column */}
-              <div className="space-y-6">
+              <div className="space-y-4 sm:space-y-6">
                 <CategoryButton 
                   icon="🖥️" 
                   title="Windows Forms" 
@@ -91,6 +91,7 @@ function App() {
               </div>
             </div>
 
+            {/* Modals */}
             <BasicConceptsModal 
               isOpen={isBasicConceptsOpen}
               onClose={() => setIsBasicConceptsOpen(false)}
@@ -143,12 +144,12 @@ function CategoryButton({
 }) {
   return (
     <button 
-      className={`w-full p-6 ${color} hover:opacity-90 transition-all rounded-xl shadow-xl
-      transform hover:scale-105 flex items-center space-x-4`}
+      className={`w-full p-3 sm:p-4 md:p-6 ${color} hover:opacity-90 transition-all rounded-xl shadow-xl
+      transform hover:scale-105 flex items-center space-x-2 sm:space-x-4`}
       onClick={onClick}
     >
-      <span className="text-3xl">{icon}</span>
-      <span className="text-white font-semibold text-xl">{title}</span>
+      <span className="text-2xl sm:text-3xl">{icon}</span>
+      <span className="text-white font-semibold text-lg sm:text-xl">{title}</span>
     </button>
   )
 }

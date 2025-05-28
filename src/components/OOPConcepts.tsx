@@ -247,27 +247,24 @@ export function OOPConceptsModal({ isOpen, onClose }: OOPConceptsModalProps) {
 
   if (!isOpen) return null;
 
-  return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-gray-800 rounded-lg max-w-6xl w-full max-h-[90vh] overflow-y-auto">
-        <div className="p-6">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-3xl font-bold text-blue-400">Object-Oriented Programming in VB.NET</h2>
+  return (    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 sm:p-4 z-50">
+      <div className="bg-gray-800 rounded-lg w-full max-w-[95vw] sm:max-w-6xl max-h-[90vh] overflow-y-auto">
+        <div className="p-3 sm:p-6">
+          <div className="flex justify-between items-center mb-4 sm:mb-6">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-400">Object-Oriented Programming in VB.NET</h2>
             <button 
               onClick={onClose}
-              className="text-gray-400 hover:text-gray-300 text-2xl"
+              className="text-gray-400 hover:text-gray-300 text-xl sm:text-2xl"
             >
               ✕
             </button>
-          </div>
-
-          {/* Lesson Navigation */}
-          <div className="flex space-x-2 mb-6 overflow-x-auto pb-2">
+          </div>          {/* Lesson Navigation */}
+          <div className="flex space-x-2 mb-4 sm:mb-6 overflow-x-auto pb-2 -mx-2 px-2">
             {lessons.map((lesson) => (
               <button
                 key={lesson.id}
                 onClick={() => setActiveLesson(lesson.id)}
-                className={`px-4 py-2 rounded-lg flex-shrink-0 ${
+                className={`px-3 sm:px-4 py-2 rounded-lg flex-shrink-0 text-sm sm:text-base ${
                   activeLesson === lesson.id
                     ? 'bg-blue-500 text-white'
                     : 'bg-gray-700 hover:bg-gray-600 text-gray-200'
@@ -280,14 +277,13 @@ export function OOPConceptsModal({ isOpen, onClose }: OOPConceptsModalProps) {
 
           {/* Content */}
           <div className="space-y-6">
-            {lessons[activeLesson - 1]?.sections.map((section, index) => (
-              <section key={index} className="bg-gray-700 rounded-lg p-6">
-                <h3 className="text-2xl font-semibold text-blue-300 mb-4">{section.title}</h3>
-                <div className="space-y-4">
-                  <p className="text-gray-200">{section.content}</p>
+            {lessons[activeLesson - 1]?.sections.map((section, index) => (              <section key={index} className="bg-gray-700 rounded-lg p-3 sm:p-6">
+                <h3 className="text-xl sm:text-2xl font-semibold text-blue-300 mb-3 sm:mb-4">{section.title}</h3>
+                <div className="space-y-3 sm:space-y-4">
+                  <p className="text-gray-200 text-sm sm:text-base">{section.content}</p>
 
                   {section.list && (
-                    <ul className="list-disc pl-5 space-y-2 text-gray-200">
+                    <ul className="list-disc pl-4 sm:pl-5 space-y-1 sm:space-y-2 text-gray-200 text-sm sm:text-base">
                       {section.list.map((item, i) => (
                         <li key={i}>{item}</li>
                       ))}
@@ -295,13 +291,13 @@ export function OOPConceptsModal({ isOpen, onClose }: OOPConceptsModalProps) {
                   )}
 
                   {section.code && (
-                    <pre className="bg-gray-900 p-4 rounded-lg text-gray-100 text-sm overflow-x-auto">
+                    <pre className="bg-gray-900 p-3 sm:p-4 rounded-lg text-gray-100 text-xs sm:text-sm overflow-x-auto">
                       {section.code}
                     </pre>
                   )}
 
                   {section.imagePath && (
-                    <div className="mt-4">
+                    <div className="mt-3 sm:mt-4">
                       <img 
                         src={section.imagePath} 
                         alt={section.title}

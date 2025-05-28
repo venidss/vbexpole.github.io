@@ -263,21 +263,22 @@ export function BasicConceptsModal({ isOpen, onClose }: BasicConceptsModalProps)
   
   if (!isOpen) return null;
 
-  return (    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-2xl max-w-6xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
-        <div className="p-6">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-3xl font-bold text-blue-600">VB.NET: Basic Concepts</h2>
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 sm:p-4 z-50">
+      <div className="bg-white rounded-2xl w-full max-w-[95vw] sm:max-w-6xl max-h-[95vh] overflow-y-auto shadow-2xl">
+        <div className="p-4 sm:p-6">
+          <div className="flex justify-between items-center mb-4 sm:mb-6">
+            <h2 className="text-2xl sm:text-3xl font-bold text-blue-600">VB.NET: Basic Concepts</h2>
             <button 
               onClick={onClose}
-              className="text-gray-500 hover:text-gray-700 text-2xl"
+              className="text-gray-500 hover:text-gray-700 text-xl sm:text-2xl"
             >
               ✕
             </button>
           </div>
           
           {/* Lesson Navigation */}
-          <div className="flex space-x-2 mb-6 overflow-x-auto pb-2">
+          <div className="flex space-x-2 mb-4 sm:mb-6 overflow-x-auto pb-2 -mx-2 px-2">
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((lesson) => (
               <button
                 key={lesson}
@@ -291,7 +292,9 @@ export function BasicConceptsModal({ isOpen, onClose }: BasicConceptsModalProps)
                 Lesson {lesson}
               </button>
             ))}
-          </div>          <div className="space-y-6">
+          </div>
+          
+          <div className="space-y-4 sm:space-y-6">
             {lessons[activeLesson - 1]?.sections.map((section, index) => (
               <section key={index}>
                 <h3 className="text-2xl font-semibold text-blue-500 mb-3">{section.title}</h3>

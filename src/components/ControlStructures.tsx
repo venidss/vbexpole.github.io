@@ -147,25 +147,23 @@ End Select`}
 
   if (!isOpen) return null;
 
-  return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[80vh] overflow-y-auto shadow-2xl">
-        <div className="p-6">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-3xl font-bold text-blue-600">Control Structures in VB.NET</h2>
+  return (    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 sm:p-4 z-50">
+      <div className="bg-white rounded-2xl w-full max-w-[95vw] sm:max-w-4xl max-h-[90vh] overflow-y-auto shadow-2xl">
+        <div className="p-3 sm:p-6">
+          <div className="flex justify-between items-center mb-4 sm:mb-6">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-600">Control Structures in VB.NET</h2>
             <button 
               onClick={onClose}
-              className="text-gray-500 hover:text-gray-700 text-2xl"
+              className="text-gray-500 hover:text-gray-700 text-xl sm:text-2xl"
             >
               ✕
             </button>
           </div>
 
-          <div className="space-y-6">
-            <div className="flex gap-4 mb-6">
+          <div className="space-y-4 sm:space-y-6">            <div className="flex flex-wrap gap-2 sm:gap-4 mb-4 sm:mb-6">
               <button
                 onClick={() => setActiveExample('if')}
-                className={`px-4 py-2 rounded-lg font-semibold ${
+                className={`px-3 sm:px-4 py-2 rounded-lg text-sm sm:text-base font-semibold ${
                   activeExample === 'if' 
                     ? 'bg-blue-500 text-white' 
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -175,7 +173,7 @@ End Select`}
               </button>
               <button
                 onClick={() => setActiveExample('for')}
-                className={`px-4 py-2 rounded-lg font-semibold ${
+                className={`px-3 sm:px-4 py-2 rounded-lg text-sm sm:text-base font-semibold ${
                   activeExample === 'for' 
                     ? 'bg-blue-500 text-white' 
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -185,7 +183,7 @@ End Select`}
               </button>
               <button
                 onClick={() => setActiveExample('select')}
-                className={`px-4 py-2 rounded-lg font-semibold ${
+                className={`px-3 sm:px-4 py-2 rounded-lg text-sm sm:text-base font-semibold ${
                   activeExample === 'select' 
                     ? 'bg-blue-500 text-white' 
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
