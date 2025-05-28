@@ -11,19 +11,16 @@ export function DebuggingModal({ isOpen, onClose }: DebuggingModalProps) {
 
   if (!isOpen) return null;
 
-  return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-gray-800 rounded-lg max-w-6xl w-full max-h-[90vh] overflow-y-auto">
-        <div className="p-6">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-2xl font-bold">Debugging in VB.NET</h2>
-            <button onClick={onClose} className="text-gray-500 hover:text-gray-700">✕</button>
-          </div>
-
-          <div className="flex gap-4 mb-6">
+  return (    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 sm:p-4 z-50">
+      <div className="bg-gray-800 rounded-lg w-full max-w-[95vw] sm:max-w-6xl max-h-[90vh] overflow-y-auto">
+        <div className="p-3 sm:p-6">
+          <div className="flex justify-between items-center mb-3 sm:mb-4">
+            <h2 className="text-xl sm:text-2xl font-bold">Debugging in VB.NET</h2>
+            <button onClick={onClose} className="text-gray-500 hover:text-gray-700 text-xl sm:text-2xl">✕</button>
+          </div>          <div className="flex flex-wrap gap-2 sm:gap-4 mb-4 sm:mb-6">
             <button
               onClick={() => setActiveTab('learn')}
-              className={`px-4 py-2 rounded ${
+              className={`px-3 sm:px-4 py-2 rounded text-sm sm:text-base ${
                 activeTab === 'learn' 
                   ? 'bg-blue-500 text-white' 
                   : 'bg-black-500 hover:bg-gray-300'
@@ -33,7 +30,7 @@ export function DebuggingModal({ isOpen, onClose }: DebuggingModalProps) {
             </button>
             <button
               onClick={() => setActiveTab('practice')}
-              className={`px-4 py-2 rounded ${
+              className={`px-3 sm:px-4 py-2 rounded text-sm sm:text-base ${
                 activeTab === 'practice' 
                   ? 'bg-blue-500 text-white' 
                   : 'bg-black-500 hover:bg-gray-300'
@@ -44,11 +41,10 @@ export function DebuggingModal({ isOpen, onClose }: DebuggingModalProps) {
           </div>
 
           {activeTab === 'learn' && (
-            <div className="space-y-6">
-              <div className="flex gap-4 mb-6">
+            <div className="space-y-6">              <div className="flex flex-wrap gap-2 sm:gap-4 mb-4 sm:mb-6">
                 <button
                   onClick={() => setActiveSection('basics')}
-                  className={`px-4 py-2 rounded ${
+                  className={`px-3 sm:px-4 py-2 rounded text-sm sm:text-base ${
                     activeSection === 'basics' 
                       ? 'bg-green-500 text-white' 
                       : 'bg-black-500 hover:bg-gray-300'
@@ -58,7 +54,7 @@ export function DebuggingModal({ isOpen, onClose }: DebuggingModalProps) {
                 </button>
                 <button
                   onClick={() => setActiveSection('breakpoints')}
-                  className={`px-4 py-2 rounded ${
+                  className={`px-3 sm:px-4 py-2 rounded text-sm sm:text-base ${
                     activeSection === 'breakpoints' 
                       ? 'bg-green-500 text-white' 
                       : 'bg-black-500 hover:bg-gray-300'
@@ -68,7 +64,7 @@ export function DebuggingModal({ isOpen, onClose }: DebuggingModalProps) {
                 </button>
                 <button
                   onClick={() => setActiveSection('watches')}
-                  className={`px-4 py-2 rounded ${
+                  className={`px-3 sm:px-4 py-2 rounded text-sm sm:text-base ${
                     activeSection === 'watches' 
                       ? 'bg-green-500 text-white' 
                       : 'bg-black-500 hover:bg-gray-300'
@@ -78,7 +74,7 @@ export function DebuggingModal({ isOpen, onClose }: DebuggingModalProps) {
                 </button>
                 <button
                   onClick={() => setActiveSection('advanced')}
-                  className={`px-4 py-2 rounded ${
+                  className={`px-3 sm:px-4 py-2 rounded text-sm sm:text-base ${
                     activeSection === 'advanced' 
                       ? 'bg-green-500 text-white' 
                       : 'bg-black-500 hover:bg-gray-300'
@@ -89,13 +85,12 @@ export function DebuggingModal({ isOpen, onClose }: DebuggingModalProps) {
               </div>
 
               {activeSection === 'basics' && (
-                <div className="space-y-4">
-                  <section className="bg-gray-100 text-black p-4 rounded-lg border">
-                    <h3 className="text-xl font-semibold mb-4">Debugging Fundamentals</h3>
-                    <div className="prose max-w-none">
-                      <div className="mb-4">
+                <div className="space-y-4">                  <section className="bg-gray-100 text-black p-3 sm:p-4 rounded-lg border">
+                    <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">Debugging Fundamentals</h3>
+                    <div className="prose max-w-none text-sm sm:text-base">
+                      <div className="mb-3 sm:mb-4">
                         <h4 className="font-semibold">1. Debug vs Release Mode</h4>
-                        <ul className="list-disc pl-5 mb-4">
+                        <ul className="list-disc pl-4 sm:pl-5 mb-3 sm:mb-4 space-y-1 sm:space-y-2">
                           <li>Debug mode includes additional information for debugging</li>
                           <li>Release mode optimizes code for performance</li>
                           <li>Switch between modes in Visual Studio's toolbar</li>
@@ -115,8 +110,7 @@ export function DebuggingModal({ isOpen, onClose }: DebuggingModalProps) {
                       </div>
 
                       <div className="mb-4">
-                        <h4 className="font-semibold">3. Debug Output</h4>
-                        <pre className="bg-gray-200 p-4 rounded-lg text-sm">
+                        <h4 className="font-semibold">3. Debug Output</h4>                        <pre className="bg-gray-200 p-3 sm:p-4 rounded-lg text-xs sm:text-sm overflow-x-auto">
 {`' Using Debug.Print for debugging output
 Debug.Print("Variable value: " & myVariable)
 
@@ -226,10 +220,9 @@ customer.Orders.Add(New Order(100))
                 <div className="space-y-4">
                   <section className="bg-gray-500 p-4 rounded-lg border">
                     <h3 className="text-xl text-black font-semibold mb-4">Advanced Debugging Techniques</h3>
-                    <div className="prose max-w-none">
-                      <div className="mb-4">
-                        <h4 className="font-semibold text-black">1. Exception Handling</h4>
-                        <pre className="bg-gray-200 p-4 rounded-lg text-sm">
+                    <div className="prose max-w-none">                      <div className="mb-3 sm:mb-4">
+                        <h4 className="font-semibold text-black text-sm sm:text-base">1. Exception Handling</h4>
+                        <pre className="bg-gray-200 p-3 sm:p-4 rounded-lg text-xs sm:text-sm overflow-x-auto mt-2">
 {`' Configure exception settings in VS:
 Try
     Dim result = riskyOperation()

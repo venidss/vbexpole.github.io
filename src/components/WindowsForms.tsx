@@ -28,46 +28,42 @@ export function WindowsFormsModal({ isOpen, onClose }: WindowsFormsModalProps) {
 
   if (!isOpen) return null;
 
-  return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
-        <div className="p-6">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-3xl font-bold text-blue-600">Windows Forms Tutorials</h2>
+  return (    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 sm:p-4 z-50">
+      <div className="bg-white rounded-2xl w-full max-w-[95vw] sm:max-w-5xl max-h-[95vh] overflow-y-auto shadow-2xl">
+        <div className="p-3 sm:p-6">
+          <div className="flex justify-between items-center mb-4 sm:mb-6">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-600">Windows Forms Tutorials</h2>
             <button 
               onClick={onClose}
-              className="text-gray-500 hover:text-gray-700 text-2xl"
+              className="text-gray-500 hover:text-gray-700 text-xl sm:text-2xl"
             >
               ✕
             </button>
           </div>
 
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {/* Video List Sidebar */}
             <div className="space-y-4">
-              {tutorials.map((tutorial, index) => (
-                <button
+              {tutorials.map((tutorial, index) => (                <button
                   key={index}
                   onClick={() => setSelectedVideo(index)}
-                  className={`w-full text-left p-4 rounded-lg transition-all ${
+                  className={`w-full text-left p-3 sm:p-4 rounded-lg transition-all ${
                     selectedVideo === index
                       ? 'bg-blue-500 text-white'
                       : 'bg-gray-100 hover:bg-gray-200'
                   }`}
                 >
-                  <h3 className="font-semibold">{tutorial.title}</h3>
-                  <p className={`text-sm mt-1 ${
+                  <h3 className="font-semibold text-sm sm:text-base">{tutorial.title}</h3>
+                  <p className={`text-xs sm:text-sm mt-1 ${
                     selectedVideo === index ? 'text-blue-100' : 'text-gray-600'
                   }`}>
                     {tutorial.description}
                   </p>
                 </button>
               ))}
-            </div>
-
-            {/* Video Player Area */}
-            <div className="col-span-2">
-              <div className="aspect-video bg-black rounded-lg overflow-hidden">
+            </div>            {/* Video Player Area */}
+            <div className="col-span-1 sm:col-span-2">
+              <div className="aspect-video bg-black rounded-lg overflow-hidden shadow-lg">
                 <iframe
                   src={tutorials[selectedVideo].url}
                   className="w-full h-full"
@@ -75,11 +71,11 @@ export function WindowsFormsModal({ isOpen, onClose }: WindowsFormsModalProps) {
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 ></iframe>
               </div>
-              <div className="mt-4">
-                <h3 className="text-xl font-semibold text-gray-800">
+              <div className="mt-3 sm:mt-4">
+                <h3 className="text-lg sm:text-xl font-semibold text-gray-800">
                   {tutorials[selectedVideo].title}
                 </h3>
-                <p className="text-gray-600 mt-2">
+                <p className="text-sm sm:text-base text-gray-600 mt-1 sm:mt-2">
                   {tutorials[selectedVideo].description}
                 </p>
               </div>
