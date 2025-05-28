@@ -60,7 +60,7 @@ export function DatabaseProgrammingModal({ isOpen, onClose }: DatabaseProgrammin
   if (!isOpen) return null;
 
   return (    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 sm:p-4 z-50">
-      <div className="bg-white rounded-2xl w-full max-w-[95vw] sm:max-w-6xl max-h-[95vh] overflow-y-auto shadow-2xl">
+      <div className="bg-gray-800 rounded-2xl w-full max-w-[95vw] sm:max-w-6xl max-h-[95vh] overflow-y-auto shadow-2xl">
         <div className="p-3 sm:p-6">
           <div className="flex justify-between items-center mb-4 sm:mb-6">
             <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-600">Database Programming in VB.NET</h2>
@@ -76,7 +76,7 @@ export function DatabaseProgrammingModal({ isOpen, onClose }: DatabaseProgrammin
               className={`px-4 sm:px-6 py-2 sm:py-3 rounded-lg text-sm sm:text-base font-semibold ${
                 activeTab === 'learn'
                   ? 'bg-blue-500 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'bg-gray-700 hover:bg-gray-600 text-gray-200'
               }`}
             >
               Learn Database Concepts
@@ -86,7 +86,7 @@ export function DatabaseProgrammingModal({ isOpen, onClose }: DatabaseProgrammin
               className={`px-4 sm:px-6 py-2 sm:py-3 rounded-lg text-sm sm:text-base font-semibold ${
                 activeTab === 'practice'
                   ? 'bg-blue-500 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'bg-gray-700 hover:bg-gray-600 text-gray-200'
               }`}
             >
               Practice Area
@@ -97,8 +97,8 @@ export function DatabaseProgrammingModal({ isOpen, onClose }: DatabaseProgrammin
             <div className="space-y-6">
               <section>
                 <h3 className="text-2xl font-semibold text-blue-500 mb-3">Database Connection</h3>
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <pre className="text-sm text-gray-800">
+                <div className="bg-gray-700 p-4 rounded-lg">
+                  <pre className="text-sm text-gray-100">
 {`' Connect to SQL Server Database
 Imports System.Data.SqlClient
 
@@ -115,8 +115,8 @@ End Class`}
 
               <section>
                 <h3 className="text-2xl font-semibold text-blue-500 mb-3">Basic CRUD Operations</h3>
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <pre className="text-sm text-gray-800">
+                <div className="bg-gray-700 p-4 rounded-lg">
+                  <pre className="text-sm text-gray-100">
 {`' Insert Data
 Using conn As New SqlConnection(connectionString)
     Dim query As String = "INSERT INTO Students (Name, Age, Course) VALUES (@Name, @Age, @Course)"
@@ -134,7 +134,7 @@ End Using`}
             </div>
           ) : (
             <div className="space-y-6">
-              <section className="border rounded-lg p-4">
+              <section className="rounded-lg p-4 bg-gray-700">
                 <h3 className="text-xl font-semibold text-blue-500 mb-4">Student Database Practice</h3>
                 
                 {/* Student Table */}

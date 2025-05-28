@@ -23,7 +23,7 @@ export function DebuggingModal({ isOpen, onClose }: DebuggingModalProps) {
               className={`px-3 sm:px-4 py-2 rounded text-sm sm:text-base ${
                 activeTab === 'learn' 
                   ? 'bg-blue-500 text-white' 
-                  : 'bg-black-500 hover:bg-gray-300'
+                  : 'bg-gray-700 hover:bg-gray-600 text-gray-200'
               }`}
             >
               Learn
@@ -33,7 +33,7 @@ export function DebuggingModal({ isOpen, onClose }: DebuggingModalProps) {
               className={`px-3 sm:px-4 py-2 rounded text-sm sm:text-base ${
                 activeTab === 'practice' 
                   ? 'bg-blue-500 text-white' 
-                  : 'bg-black-500 hover:bg-gray-300'
+                  : 'bg-gray-700 hover:bg-gray-600 text-gray-200'
               }`}
             >
               Practice
@@ -85,8 +85,8 @@ export function DebuggingModal({ isOpen, onClose }: DebuggingModalProps) {
               </div>
 
               {activeSection === 'basics' && (
-                <div className="space-y-4">                  <section className="bg-gray-100 text-black p-3 sm:p-4 rounded-lg border">
-                    <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">Debugging Fundamentals</h3>
+                <div className="space-y-4">                  <section className="bg-gray-700 text-gray-100 p-3 sm:p-4 rounded-lg border">
+                    <h3 className="text-lg sm:text-xl font-semibold text-blue-300 mb-3 sm:mb-4">Debugging Fundamentals</h3>
                     <div className="prose max-w-none text-sm sm:text-base">
                       <div className="mb-3 sm:mb-4">
                         <h4 className="font-semibold">1. Debug vs Release Mode</h4>
@@ -110,7 +110,7 @@ export function DebuggingModal({ isOpen, onClose }: DebuggingModalProps) {
                       </div>
 
                       <div className="mb-4">
-                        <h4 className="font-semibold">3. Debug Output</h4>                        <pre className="bg-gray-200 p-3 sm:p-4 rounded-lg text-xs sm:text-sm overflow-x-auto">
+                        <h4 className="font-semibold">3. Debug Output</h4>                        <pre className="bg-gray-600 p-3 sm:p-4 rounded-lg text-xs sm:text-sm overflow-x-auto">
 {`' Using Debug.Print for debugging output
 Debug.Print("Variable value: " & myVariable)
 
@@ -126,11 +126,11 @@ Debug.WriteLine("Processing started", "Status")`}
                 </div>
               )}              {activeSection === 'breakpoints' && (
                 <div className="space-y-4">
-                  <section className="bg-gray-500 p-4 rounded-lg border">
-                    <h3 className="text-xl text-black font-semibold mb-4">Working with Breakpoints</h3>
+                  <section className="bg-gray-700 p-4 rounded-lg">
+                    <h3 className="text-xl text-blue-300 font-semibold mb-4">Working with Breakpoints</h3>
                     <div className="prose max-w-none">
                       <div className="mb-4">
-                        <h4 className="font-semibold text-black">1. Setting Breakpoints</h4>
+                        <h4 className="font-semibold text-gray-100">1. Setting Breakpoints</h4>
                         <ul className="list-disc pl-5 mb-4">
                           <li>Click in the left margin or press F9</li>
                           <li>Right-click for additional options</li>
@@ -138,8 +138,8 @@ Debug.WriteLine("Processing started", "Status")`}
                         </ul>
                       </div>
 
-                      <div className="mb-4">                        <h4 className="font-semibold text-black">2. Conditional Breakpoints</h4>
-                        <pre className="bg-gray-300 text-black p-4 rounded-lg text-sm">
+                      <div className="mb-4">                        <h4 className="font-semibold text-gray-100">2. Conditional Breakpoints</h4>
+                        <pre className="bg-gray-500 p-4 rounded-lg text-sm">
 {`' Example of where you might set a conditional breakpoint:
 For i As Integer = 1 To 100
     ' Set condition: Break when i = 50
@@ -156,7 +156,7 @@ End While`}
 
                       <div className="mb-4">
                         <h4 className="font-semibold">3. Tracepoints</h4>
-                        <pre className="bg-gray-200 p-4 rounded-lg text-sm">
+                        <pre className="bg-gray-500 p-4 rounded-lg text-sm">
 {`' Example of where to use a tracepoint:
 Public Sub ProcessOrder(order As Order)
     ' Add tracepoint to log order details
@@ -172,17 +172,17 @@ End Sub`}
                 </div>
               )}              {activeSection === 'watches' && (
                 <div className="space-y-4">
-                  <section className="bg-gray-500 p-4 rounded-lg border">
-                    <h3 className="text-xl text-black font-semibold mb-4">Watch Windows & Local Variables</h3>
+                  <section className="bg-gray-700 p-4 rounded-lg">
+                    <h3 className="text-xl text-blue-300 font-semibold mb-4">Watch Windows & Local Variables</h3>
                     <div className="prose max-w-none">
                       <div className="mb-4">
-                        <h4 className="font-semibold text-black">1. Watch Window</h4>
+                        <h4 className="font-semibold text-gray-100">1. Watch Window</h4>
                         <ul className="list-disc pl-5 mb-4">
                           <li>Add variables to track their values</li>
                           <li>Use expressions to monitor computed values</li>
                           <li>Multiple watch windows for organization</li>
                         </ul>
-                        <pre className="bg-gray-200 p-4 rounded-lg text-sm">
+                        <pre className="bg-gray-600 p-4 rounded-lg text-sm">
 {`' Examples of watch expressions:
 customer.Name                 ' Simple property
 orders.Count                 ' Collection count
@@ -202,7 +202,7 @@ String.Format("{0:C}", price) ' Formatted value`}
 
                       <div className="mb-4">
                         <h4 className="font-semibold">3. QuickWatch</h4>
-                        <pre className="bg-gray-200 p-4 rounded-lg text-sm">
+                        <pre className="bg-gray-600 p-4 rounded-lg text-sm">
 {`' Example code to practice QuickWatch:
 Dim customer As New Customer
 customer.Name = "John Doe"
@@ -218,11 +218,11 @@ customer.Orders.Add(New Order(100))
                 </div>
               )}              {activeSection === 'advanced' && (
                 <div className="space-y-4">
-                  <section className="bg-gray-500 p-4 rounded-lg border">
-                    <h3 className="text-xl text-black font-semibold mb-4">Advanced Debugging Techniques</h3>
+                  <section className="bg-gray-700 p-4 rounded-lg">
+                    <h3 className="text-xl text-blue-300 font-semibold mb-4">Advanced Debugging Techniques</h3>
                     <div className="prose max-w-none">                      <div className="mb-3 sm:mb-4">
-                        <h4 className="font-semibold text-black text-sm sm:text-base">1. Exception Handling</h4>
-                        <pre className="bg-gray-200 p-3 sm:p-4 rounded-lg text-xs sm:text-sm overflow-x-auto mt-2">
+                        <h4 className="font-semibold text-gray-100 text-sm sm:text-base">1. Exception Handling</h4>
+                        <pre className="bg-gray-600 p-3 sm:p-4 rounded-lg text-xs sm:text-sm overflow-x-auto mt-2">
 {`' Configure exception settings in VS:
 Try
     Dim result = riskyOperation()
@@ -263,12 +263,12 @@ End Try`}
 
           {activeTab === 'practice' && (
             <div className="space-y-6">
-              <section className="bg-gray-500 p-4 rounded-lg border">
-                <h3 className="text-xl text-black font-semibold mb-4">Debug Practice Scenarios</h3>
+              <section className="bg-gray-800 p-4 rounded-lg border">
+                <h3 className="text-xl text-blue-300 font-semibold mb-4">Debug Practice Scenarios</h3>
                 <div className="prose max-w-none">
                   <div className="mb-4">
-                    <h4 className="font-semibold text-black">Scenario 1: Find the Bug</h4>
-                    <pre className="bg-gray-300 text-black p-4 rounded-lg text-sm">
+                    <h4 className="font-semibold text-gray-100">Scenario 1: Find the Bug</h4>
+                    <pre className="bg-gray-600 p-4 rounded-lg text-sm">
 {`Public Function CalculateTotal(items As List(Of OrderItem)) As Decimal
     Dim total As Decimal = 0
     For i As Integer = 1 To items.Count
@@ -283,8 +283,8 @@ End Function
                   </div>
 
                   <div className="mb-4">
-                    <h4 className="font-semibold text-black">Scenario 2: Performance Issue</h4>
-                    <pre className="bg-gray-300 text-black p-4 rounded-lg text-sm">
+                    <h4 className="font-semibold text-gray-100">Scenario 2: Performance Issue</h4>
+                    <pre className="bg-gray-600 p-4 rounded-lg text-sm">
 {`Public Sub ProcessLargeList(items As List(Of String))
     Dim result As New List(Of String)
     For Each item In items
@@ -301,8 +301,8 @@ End Sub
                   </div>
 
                   <div className="mb-4">
-                    <h4 className="font-semibold text-black">Scenario 3: Memory Leak</h4>
-                    <pre className="bg-gray-300 text-black p-4 rounded-lg text-sm">
+                    <h4 className="font-semibold text-gary-100">Scenario 3: Memory Leak</h4>
+                    <pre className="bg-gray-600 p-4 rounded-lg text-sm">
 {`Public Class ResourceManager
     Private resources As New List(Of IDisposable)
     
@@ -320,8 +320,8 @@ End Class
                     </pre>
                   </div>
 
-                  <div className="mt-4"><h4 className="font-semibold text-black">Debugging Tips</h4>
-                    <ul className="list-disc space-y-2 bg-gray-300 text-black p-4 rounded-lg text-sm">
+                  <div className="mt-4"><h4 className="font-semibold text-gray-100">Debugging Tips</h4>
+                    <ul className="list-disc space-y-2 bg-gray-600 p-4 rounded-lg text-sm">
                       <li>Start with reproducible test cases</li>
                       <li>Use strategic breakpoints</li>
                       <li>Check variable values at each step</li>

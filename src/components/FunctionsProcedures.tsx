@@ -181,11 +181,11 @@ export function FunctionsProceduresModal({ isOpen, onClose }: FunctionsProcedure
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-lg max-w-6xl w-full max-h-[90vh] overflow-y-auto">
+      <div className="bg-gray-800 rounded-lg max-w-6xl w-full max-h-[90vh] overflow-y-auto">
         <div className="p-6">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-2xl text-black font-bold">Functions and Procedures in VB.NET</h2>
-            <button onClick={onClose} className="text-gray-500 hover:text-gray-700">✕</button>
+            <h2 className="text-2xl text-blue-400 font-bold">Functions and Procedures in VB.NET</h2>
+            <button onClick={onClose} className="text-gray-500 hover:text-blue-700">✕</button>
           </div>
 
           <div className="flex gap-4 mb-6">
@@ -194,7 +194,7 @@ export function FunctionsProceduresModal({ isOpen, onClose }: FunctionsProcedure
               className={`px-4 py-2 rounded ${
                 activeTab === 'learn' 
                   ? 'bg-blue-500 text-white' 
-                  : 'bg-blue-400 hover:bg-gray-200'
+                  : 'bg-gray-700 hover:bg-gray-600 text-gray-200'
               }`}
             >
               Learn
@@ -204,7 +204,7 @@ export function FunctionsProceduresModal({ isOpen, onClose }: FunctionsProcedure
               className={`px-4 py-2 rounded ${
                 activeTab === 'practice' 
                   ? 'bg-blue-500 text-white' 
-                  : 'bg-blue-300 hover:bg-gray-200'
+                  : 'bg-gray-700 hover:bg-gray-600 text-gray-200'
               }`}
             >
               Practice
@@ -258,8 +258,8 @@ export function FunctionsProceduresModal({ isOpen, onClose }: FunctionsProcedure
 
               {activeSection === 'basics' && (
                 <div className="space-y-4">
-                  <section className="bg-gray-500 p-4 rounded-lg border">
-                    <h3 className="text-xl font-semibold mb-4">Basic Concepts</h3>
+                  <section className="bg-gray-700 p-4 rounded-lg">
+                    <h3 className="text-xl font-semibold text-blue-300 mb-4">Basic Concepts</h3>
                     <div className="prose max-w-none">
                       <p className="mb-5">
                         In VB.NET, there are two main types of methods:
@@ -268,7 +268,7 @@ export function FunctionsProceduresModal({ isOpen, onClose }: FunctionsProcedure
                         <li><strong>Functions</strong> - Return a value</li>
                         <li><strong>Procedures (Sub)</strong> - Perform actions without returning values</li>
                       </ul>
-                      <pre className="bg-gray-200 p-4 rounded-lg text-black">
+                      <pre className="bg-gray-600 p-4 rounded-lg">
 {`' Basic Function with error handling
 Function Add(x As Integer, y As Integer) As Integer
     Try
@@ -299,10 +299,10 @@ End Sub`}
                     </div>
                   </section>
 
-                  <section className="bg-gray-500 p-4 rounded-lg border">
-                    <h3 className="text-xl  font-semibold mb-4">Method Components</h3>
+                  <section className="bg-gray-500 p-4 rounded-lg">
+                    <h3 className="text-xl  font-semibold text-blue-300 mb-4">Method Components</h3>
                     <div className="prose max-w-none">
-                      <ul className="list-disc  pl-5 mb-4">
+                      <ul className="list-disc  pl-5 mb-4 ">
                         <li><strong>Name</strong> - Meaningful identifier for the method</li>
                         <li><strong>Parameters</strong> - Input values (optional)</li>
                         <li><strong>Return Type</strong> - For functions only</li>
@@ -315,12 +315,12 @@ End Sub`}
 
               {activeSection === 'functions' && (
                 <div className="space-y-4">
-                  <section className="bg-gray-500 p-4 rounded-lg border">
-                    <h3 className="text-xl font-semibold mb-4">Function Types</h3>
+                  <section className="bg-gray-700 p-4 rounded-lg">
+                    <h3 className="text-xl font-semibold text-blue-300 mb-4">Function Types</h3>
                     <div className="prose max-w-none">
                       <div className="mb-4">
                         <h4 className="font-semibold">1. Simple Functions</h4>
-                        <pre className="bg-gray-300 p-4 rounded-lg text-black text-sm">
+                        <pre className="bg-gray-600 p-4 rounded-lg text-sm">
 {`Function CalculateArea(radius As Double) As Double
     Try
         If radius < 0 Then
@@ -339,8 +339,8 @@ End Function`}
                       </div>
                       
                       <div className="mb-4">
-                        <h4 className="font-semibold">2. Functions with Multiple Parameters</h4>
-                        <pre className="bg-gray-300 p-4 rounded-lg text-black text-sm">
+                        <h4 className="font-semibold bg-gray-700">2. Functions with Multiple Parameters</h4>
+                        <pre className="bg-gray-600 p-4 rounded-lg text-sm">
 {`Function FormatFullName(firstName As String, 
                      lastName As String, 
                      Optional title As String = "") As String
@@ -365,8 +365,8 @@ End Function`}
                       </div>
 
                       <div className="mb-4">
-                        <h4 className="font-semibold">3. Functions with Different Return Types</h4>
-                        <pre className="bg-gray-300 p-4 rounded-lg text-black text-sm">
+                        <h4 className="font-semibold bg-gray-700" >3. Functions with Different Return Types</h4>
+                        <pre className="bg-gray-600 p-4 rounded-lg  text-sm">
 {`Function IsValidAge(age As Integer) As Boolean
     Try
         If age < 0 Then
@@ -400,9 +400,9 @@ End Function`}
                     </div>
                   </section>
 
-                  <section className="bg-gray-500 p-4 rounded-lg border">
-                    <h3 className="text-xl font-semibold mb-4">Function Best Practices</h3>
-                    <div className="bg-gray-300 p-4 rounded-lg text-black text-sm">
+                  <section className="bg-gray-700 p-4 rounded-lg">
+                    <h3 className="text-xl font-semibold text-blue-300 mb-4">Function Best Practices</h3>
+                    <div className="bg-gray-600 p-4 rounded-lg text-sm">
                       <ul className="list-disc pl-5">
                         <li>Use clear, descriptive names</li>
                         <li>Keep functions focused on a single task</li>
@@ -416,12 +416,12 @@ End Function`}
                 </div>
               )}              {activeSection === 'procedures' && (
                 <div className="space-y-4">
-                  <section className="bg-gray-500 p-4 rounded-lg border">
-                    <h3 className="text-xl font-semibold mb-4">Procedure (Sub) Types</h3>
+                  <section className="bg-gray-700 p-4 rounded-lg">
+                    <h3 className="text-xl font-semibold text-blue-300 mb-4">Procedure (Sub) Types</h3>
                     <div className="prose max-w-none">
                       <div className="mb-4">
                         <h4 className="font-semibold">1. Simple Procedures</h4>
-                        <pre className="bg-gray-300 p-4 rounded-lg text-black text-sm">
+                        <pre className="bg-gray-600 p-4 rounded-lg text-sm">
 {`Sub DisplayWelcome()
     Try
         ' Simulate potential I/O operation
@@ -435,8 +435,8 @@ End Sub`}
                       </div>
                       
                       <div className="mb-4">
-                        <h4 className="font-semibold">2. Procedures with Parameters</h4>
-                        <pre className="bg-gray-300 text-black p-4 rounded-lg text-sm">
+                        <h4 className="font-semibold bg-gray-700">2. Procedures with Parameters</h4>
+                        <pre className="bg-gray-600 p-4 rounded-lg text-sm">
 {`Sub SaveUserData(name As String, age As Integer)
     Try
         ' Validate inputs
@@ -463,8 +463,8 @@ End Sub`}
                       </div>
 
                       <div className="mb-4">
-                        <h4 className="font-semibold">3. Procedures with ByRef Parameters</h4>
-                        <pre className="bg-gray-300 text-black p-4 rounded-lg text-sm">
+                        <h4 className="font-semibold bg-gray-700">3. Procedures with ByRef Parameters</h4>
+                        <pre className="bg-gray-600 p-4 rounded-lg text-sm">
 {`Sub SwapValues(ByRef a As Integer, ByRef b As Integer)
     Try
         ' Check for overflow in temporary variable
@@ -487,9 +487,9 @@ End Sub`}
                         </pre>
                       </div>
                     </div>
-                  </section>                  <section className="bg-gray-500 p-4 rounded-lg border">
-                    <h3 className="text-xl font-semibold mb-4">Procedure Best Practices</h3>
-                    <div className="bg-gray-300 p-4 rounded-lg text-black text-sm">
+                  </section>                  <section className="bg-gray-700 p-4 rounded-lg">
+                    <h3 className="text-xl font-semibold text-blue-300 mb-4">Procedure Best Practices</h3>
+                    <div className="bg-gray-600 p-4 rounded-lg text-black text-sm">
                       <ul className="list-disc pl-5">
                         <li>Use procedures for actions that don't need to return values</li>
                         <li>Use meaningful parameter names</li>
@@ -502,12 +502,12 @@ End Sub`}
                 </div>
               )}              {activeSection === 'advanced' && (
                 <div className="space-y-4">
-                  <section className="bg-gray-500 p-4 rounded-lg border">
-                    <h3 className="text-xl font-semibold mb-4">Advanced Features</h3>
+                  <section className="bg-gray-700 p-4 rounded-lg">
+                    <h3 className="text-xl font-semibold text-blue-300 mb-4">Advanced Features</h3>
                     <div className="prose max-w-none">
                       <div className="mb-4">
                         <h4 className="font-semibold">1. Function Overloading</h4>
-                        <pre className="bg-gray-300 p-4 rounded-lg text-black text-sm">
+                        <pre className="bg-gray-600 p-4 rounded-lg  text-sm">
 {`Function Calculate(x As Integer, y As Integer) As Integer
     Return x + y
 End Function
@@ -519,8 +519,8 @@ End Function`}
                       </div>
                       
                       <div className="mb-4">
-                        <h4 className="font-semibold">2. Optional Parameters</h4>
-                        <pre className="bg-gray-300 text-black p-4 rounded-lg text-sm">
+                        <h4 className="font-semibold bg-gray-700">2. Optional Parameters</h4>
+                        <pre className="bg-gray-600 p-4 rounded-lg text-sm">
 {`Function GetDiscount(price As Decimal, 
                    Optional rate As Decimal = 0.1D, 
                    Optional isVIP As Boolean = False) As Decimal
@@ -531,8 +531,8 @@ End Function`}
                       </div>
 
                       <div className="mb-4">
-                        <h4 className="font-semibold">3. ParamArray for Variable Arguments</h4>
-                        <pre className="bg-gray-300 text-black p-4 rounded-lg text-sm">
+                        <h4 className="font-semibold bg-gray-700">3. ParamArray for Variable Arguments</h4>
+                        <pre className="bg-gray-600 p-4 rounded-lg text-sm">
 {`Function Sum(ParamArray numbers() As Integer) As Integer
     Dim total As Integer = 0
     For Each num In numbers
@@ -543,10 +543,10 @@ End Function`}
                         </pre>
                       </div>
                     </div>
-                  </section>                  <section className="bg-gray-500 p-4 rounded-lg border">
-                    <h3 className="text-xl font-semibold mb-4">Error Handling</h3>
+                  </section>                  <section className="bg-gray-700 p-4 rounded-lg">
+                    <h3 className="text-xl font-semibold text-blue-300 mb-4">Error Handling</h3>
                     <div className="prose max-w-none">
-                      <pre className="bg-gray-300 p-4 rounded-lg text-black text-sm">
+                      <pre className="bg-gray-600 p-4 rounded-lg  text-sm">
 {`Function DivideNumbers(x As Double, y As Double) As Double
     Try
         If y = 0 Then
@@ -571,7 +571,7 @@ End Function`}
 
           {activeTab === 'practice' && (
             <div className="space-y-6">              <section className="bg-gray-500 p-4 rounded-lg border">
-                <h3 className="text-xl font-semibold mb-4">Practice Area</h3>
+                <h3 className="text-xl font-semibold text-blue-300 mb-4">Practice Area</h3>
                 <div className="mb-4">
                   <label className="block text-sm font-medium mb-2">
                     Write your VB.NET code here based on the selected topic:

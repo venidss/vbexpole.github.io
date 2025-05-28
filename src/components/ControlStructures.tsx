@@ -15,9 +15,9 @@ export function ControlStructuresModal({ isOpen, onClose }: ControlStructuresMod
     switch (type) {
       case 'if':
         return (
-          <div className="space-y-4">
+          <div className="space-y-4 bg-gray-700 ">
             <div className="flex items-center gap-4 mb-4">
-              <label className="text-gray-700">Enter Age:</label>
+              <label className="text-blue-300">Enter Age:</label>
               <input 
                 type="number" 
                 min="0"
@@ -27,8 +27,8 @@ export function ControlStructuresModal({ isOpen, onClose }: ControlStructuresMod
                 className="border rounded p-2 w-24"
               />
             </div>
-            <div className="bg-gray-50 p-4 rounded-lg">
-              <pre className="text-sm text-gray-800">
+            <div className="bg-gray-900 p-4 rounded-lg">
+              <pre className="text-sm text-gray-200">
 {`' If-Then-Else Statement
 Dim age As Integer = ${age}
 
@@ -46,8 +46,8 @@ End If`}
                 Output: {age >= 18 ? "Adult" : age >= 13 ? "Teenager" : "Child"}
               </p>
             </div>
-            <div className="bg-blue-50 p-4 rounded-lg">
-              <h4 className="text-blue-600 font-semibold mb-2">Example Explanation:</h4>
+            <div className="bg-gray-900 p-4 rounded-lg">
+              <h4 className="text-gray-200 font-semibold mb-2">Example Explanation:</h4>
               <p className="text-gray-700">
                 This example demonstrates nested If-Then-Else statements to categorize age groups:
                 {age >= 18 ? (
@@ -64,9 +64,9 @@ End If`}
 
       case 'for':
         return (
-          <div className="space-y-4">
+          <div className="space-y-4" bg-gray-700 >
             <div className="flex items-center gap-4 mb-4">
-              <label className="text-gray-700">Loop Count:</label>
+              <label className="text-gray-200">Loop Count:</label>
               <input 
                 type="range" 
                 min="1" 
@@ -77,8 +77,8 @@ End If`}
               />
               <span className="text-gray-700">{loopCount}</span>
             </div>
-            <div className="bg-gray-50 p-4 rounded-lg">
-              <pre className="text-sm text-gray-800">
+            <div className="bg-gray-900 p-4 rounded-lg">
+              <pre className="text-sm text-gray-200">
 {`' For Loop Example
 For i As Integer = 1 To ${loopCount}
     Console.WriteLine(i)
@@ -98,7 +98,7 @@ Next`}
         return (
           <div className="space-y-4">
             <div className="flex items-center gap-4 mb-4">
-              <label className="text-gray-700">Select Grade:</label>
+              <label className="text-gray-200">Select Grade:</label>
               <select 
                 value={selectedCase} 
                 onChange={(e) => setSelectedCase(e.target.value)}
@@ -110,8 +110,8 @@ Next`}
                 <option value="D">D</option>
               </select>
             </div>
-            <div className="bg-gray-50 p-4 rounded-lg">
-              <pre className="text-sm text-gray-800">
+            <div className="bg-gray-900 p-4 rounded-lg">
+              <pre className="text-sm text-gray-200">
 {`' Select Case Statement
 Dim grade As String = "${selectedCase}"
 
@@ -148,7 +148,7 @@ End Select`}
   if (!isOpen) return null;
 
   return (    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 sm:p-4 z-50">
-      <div className="bg-white rounded-2xl w-full max-w-[95vw] sm:max-w-4xl max-h-[90vh] overflow-y-auto shadow-2xl">
+      <div className="bg-gray-800 rounded-lg w-full max-w-[95vw] sm:max-w-6xl max-h-[90vh] overflow-y-auto">
         <div className="p-3 sm:p-6">
           <div className="flex justify-between items-center mb-4 sm:mb-6">
             <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-600">Control Structures in VB.NET</h2>
@@ -165,8 +165,8 @@ End Select`}
                 onClick={() => setActiveExample('if')}
                 className={`px-3 sm:px-4 py-2 rounded-lg text-sm sm:text-base font-semibold ${
                   activeExample === 'if' 
-                    ? 'bg-blue-500 text-white' 
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? 'bg-blue-500 text-white'
+                    : 'bg-gray-700 hover:bg-gray-600 text-gray-200'
                 }`}
               >
                 If-Then-Else
@@ -176,7 +176,7 @@ End Select`}
                 className={`px-3 sm:px-4 py-2 rounded-lg text-sm sm:text-base font-semibold ${
                   activeExample === 'for' 
                     ? 'bg-blue-500 text-white' 
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    : 'bg-gray-700 hover:bg-gray-600 text-gray-200'
                 }`}
               >
                 For Loop
@@ -186,14 +186,14 @@ End Select`}
                 className={`px-3 sm:px-4 py-2 rounded-lg text-sm sm:text-base font-semibold ${
                   activeExample === 'select' 
                     ? 'bg-blue-500 text-white' 
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    : 'bg-gray-700 hover:bg-gray-600 text-gray-200'
                 }`}
               >
                 Select Case
               </button>
             </div>
 
-            <div className="bg-white rounded-lg p-4">
+            <div className="bg-gray-700 rounded-lg p-4">
               {renderOutput(activeExample)}
             </div>
 
