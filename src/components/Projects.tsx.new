@@ -1,0 +1,509 @@
+import { useState } from 'react';
+
+interface Section {
+  title: string;
+  content: string;
+  code?: string;
+  list?: string[];
+  imagePath?: string;
+  description?: string;
+  steps?: string[];
+}
+
+interface Project {
+  id: number;
+  title: string;
+  sections: Section[];
+}
+
+interface ProjectsModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const projects: Project[] = [
+  {
+    id: 1,
+    title: "Simple Calculator",
+    sections: [
+      {
+        title: "Project Overview",
+        content: "Create a basic calculator with arithmetic operations",
+        description: "This project will help you understand Windows Forms controls, event handling, and basic arithmetic operations.",
+        requirements: [
+          "Visual Studio 2019",
+          "Basic knowledge of VB.NET syntax",
+          "Understanding of Windows Forms"
+        ],
+        imagePath: "/src/assets/vbnet-images/calculator-project.png"
+      },
+      {
+        title: "Implementation Steps",
+        content: "Follow these steps to create the calculator application",
+        steps: [
+          "Create a new Windows Forms project",
+          "Design the calculator interface",
+          "Add number buttons and operation buttons",
+          "Implement calculation logic",
+          "Add error handling for invalid inputs"
+        ],
+        code: `Public Class Calculator
+    Private firstNumber As Decimal
+    Private operation As String
+    Private shouldClearInput As Boolean = False
+
+    Private Sub NumberButton_Click(sender As Button, e As EventArgs) Handles _
+            btn0.Click, btn1.Click, btn2.Click, btn3.Click, btn4.Click, _
+            btn5.Click, btn6.Click, btn7.Click, btn8.Click, btn9.Click
+        
+        If shouldClearInput Then
+            txtDisplay.Clear()
+            shouldClearInput = False
+        End If
+        
+        txtDisplay.Text &= sender.Text
+    End Sub
+
+    Private Sub OperationButton_Click(sender As Button, e As EventArgs) Handles _
+            btnAdd.Click, btnSubtract.Click, btnMultiply.Click, btnDivide.Click
+        
+        firstNumber = Decimal.Parse(txtDisplay.Text)
+        operation = sender.Text
+        shouldClearInput = True
+    End Sub
+
+    Private Sub btnEquals_Click(sender As Object, e As EventArgs) Handles btnEquals.Click
+        Try
+            Dim secondNumber As Decimal = Decimal.Parse(txtDisplay.Text)
+            Dim result As Decimal
+
+            Select Case operation
+                Case "+"
+                    result = firstNumber + secondNumber
+                Case "-"
+                    result = firstNumber - secondNumber
+                Case "×"
+                    result = firstNumber * secondNumber
+                Case "÷"
+                    If secondNumber = 0 Then
+                        Throw New DivideByZeroException()
+                    End If
+                    result = firstNumber / secondNumber
+            End Select
+
+            txtDisplay.Text = result.ToString()
+            shouldClearInput = True
+
+        Catch ex As DivideByZeroException
+            MessageBox.Show("Cannot divide by zero!", "Error")
+        Catch ex As Exception
+            MessageBox.Show("An error occurred!", "Error")
+        End Try
+    End Sub
+End Class`
+      }
+    ]
+  },
+  {
+    id: 2,
+    title: "Student Management System",
+    sections: [
+      {
+        title: "Project Overview",
+        content: "Create a system to manage student records with CRUD operations",
+        description: "This project demonstrates database connectivity, form handling, and data validation.",
+        requirements: [
+          "Visual Studio 2019",
+          "SQL Server or SQLite",
+          "Understanding of database operations",
+          "Knowledge of Windows Forms"
+        ],
+        imagePath: "/src/assets/vbnet-images/student-management.png"
+      },
+      {
+        title: "Database Setup",
+        content: "Set up the database schema for the student management system",
+        code: `CREATE TABLE Students (
+    StudentID INT PRIMARY KEY IDENTITY(1,1),
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50),
+    DateOfBirth DATE,
+    Grade DECIMAL(4,2),
+    Active BIT
+);`,
+        steps: [
+          "Create a new database",
+          "Create the Students table",
+          "Set up connection string",
+          "Create data access layer"
+        ]
+      },
+      {
+        title: "Implementation",
+        content: "Core implementation of the student management functionality",
+        code: `Public Class Student
+    Public Property StudentID As Integer
+    Public Property FirstName As String
+    Public Property LastName As String
+    Public Property DateOfBirth As Date
+    Public Property Grade As Decimal
+    Public Property Active As Boolean
+
+    Public Function Save() As Boolean
+        Try
+            Using conn As New SqlConnection(GetConnectionString())
+                Using cmd As New SqlCommand()
+                    cmd.Connection = conn
+                    cmd.CommandType = CommandType.Text
+                    
+                    If StudentID = 0 Then
+                        cmd.CommandText = "INSERT INTO Students (FirstName, LastName, DateOfBirth, Grade, Active) " & _
+                                        "VALUES (@FirstName, @LastName, @DateOfBirth, @Grade, @Active)"
+                    Else
+                        cmd.CommandText = "UPDATE Students SET FirstName=@FirstName, LastName=@LastName, " & _
+                                        "DateOfBirth=@DateOfBirth, Grade=@Grade, Active=@Active " & _
+                                        "WHERE StudentID=@StudentID"
+                        cmd.Parameters.AddWithValue("@StudentID", StudentID)
+                    End If
+
+                    cmd.Parameters.AddWithValue("@FirstName", FirstName)
+                    cmd.Parameters.AddWithValue("@LastName", LastName)
+                    cmd.Parameters.AddWithValue("@DateOfBirth", DateOfBirth)
+                    cmd.Parameters.AddWithValue("@Grade", Grade)
+                    cmd.Parameters.AddWithValue("@Active", Active)
+
+                    conn.Open()
+                    cmd.ExecuteNonQuery()
+                    Return True
+                End Using
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error saving student: " & ex.Message)
+            Return False
+        End Try
+    End Function
+End Class`
+      }
+    ]
+  },
+  {
+    id: 3,
+    title: "Inventory Management System",
+    sections: [
+      {
+        title: "Project Overview",
+        content: "Build a system to track inventory items and manage stock levels",
+        description: "Learn about data structures, file handling, and reporting in VB.NET",
+        requirements: [
+          "Visual Studio 2019",
+          "Understanding of File I/O",
+          "Knowledge of data structures",
+          "Basic reporting skills"
+        ],
+        imagePath: "/src/assets/vbnet-images/inventory-system.png"
+      },
+      {
+        title: "Implementation",
+        content: "Core implementation of the inventory management system",
+        code: `Public Class InventoryItem
+    Public Property ItemID As String
+    Public Property Name As String
+    Public Property Quantity As Integer
+    Public Property UnitPrice As Decimal
+    Public Property ReorderLevel As Integer
+
+    Public ReadOnly Property TotalValue As Decimal
+        Get
+            Return Quantity * UnitPrice
+        End Get
+    End Property
+
+    Public Function IsLowStock() As Boolean
+        Return Quantity <= ReorderLevel
+    End Function
+End Class
+
+Public Class InventoryManager
+    Private _items As New List(Of InventoryItem)
+
+    Public Sub AddItem(item As InventoryItem)
+        If _items.Any(Function(x) x.ItemID = item.ItemID) Then
+            Throw New Exception("Item ID already exists")
+        End If
+        _items.Add(item)
+    End Sub
+
+    Public Sub UpdateStock(itemID As String, quantity As Integer)
+        Dim item = _items.Find(Function(x) x.ItemID = itemID)
+        If item IsNot Nothing Then
+            item.Quantity += quantity
+        End If
+    End Sub
+
+    Public Function GenerateReport() As String
+        Dim report As New StringBuilder()
+        report.AppendLine("Inventory Report")
+        report.AppendLine("---------------")
+        
+        For Each item In _items
+            report.AppendLine($"Item: {item.Name}")
+            report.AppendLine($"Quantity: {item.Quantity}")
+            report.AppendLine($"Total Value: {item.TotalValue:C}")
+            If item.IsLowStock() Then
+                report.AppendLine("*** LOW STOCK ***")
+            End If
+            report.AppendLine()
+        Next
+
+        Return report.ToString()
+    End Function
+End Class`
+      }
+    ]
+  },
+  {
+    id: 4,
+    title: "File Manager",
+    sections: [
+      {
+        title: "Project Overview",
+        content: "Create a simple file manager with drag & drop support and file operations",
+        description: "Learn about file system operations, async/await in VB.NET, and Windows Forms drag & drop functionality.",
+        requirements: [
+          "Visual Studio 2019",
+          "Understanding of File I/O",
+          "Knowledge of async programming",
+          "Basic Windows Forms experience"
+        ],
+        imagePath: "/src/assets/vbnet-images/file-manager.png"
+      },
+      {
+        title: "Implementation",
+        content: "Core implementation of the file manager application",
+        code: `Public Class FileManager
+    Private CurrentPath As String = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+    
+    Private Async Function LoadFilesAndFoldersAsync() As Task
+        Try
+            lstFiles.Items.Clear()
+            
+            ' Load directories first
+            For Each dir In Directory.GetDirectories(CurrentPath)
+                Dim info As New DirectoryInfo(dir)
+                lstFiles.Items.Add(New ListViewItem With {
+                    .Text = info.Name,
+                    .ImageIndex = 0, ' Folder icon
+                    .Tag = info.FullName
+                })
+            Next
+
+            ' Then load files
+            For Each file In Directory.GetFiles(CurrentPath)
+                Dim info As New FileInfo(file)
+                lstFiles.Items.Add(New ListViewItem With {
+                    .Text = info.Name,
+                    .ImageIndex = 1, ' File icon
+                    .Tag = info.FullName,
+                    .SubItems = {
+                        info.Length.ToString("#,##0") & " bytes",
+                        info.LastWriteTime.ToString()
+                    }
+                })
+            Next
+
+            txtPath.Text = CurrentPath
+            
+        Catch ex As Exception
+            MessageBox.Show("Error loading files: " & ex.Message, "Error",
+                          MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Function
+
+    Private Sub lstFiles_ItemDrag(sender As Object, e As ItemDragEventArgs) _
+    Handles lstFiles.ItemDrag
+        Dim items() As ListViewItem = _
+            lstFiles.SelectedItems.Cast(Of ListViewItem)().ToArray()
+        
+        If items.Length > 0 Then
+            Dim files As New List(Of String)
+            For Each item In items
+                files.Add(item.Tag.ToString())
+            Next
+            
+            lstFiles.DoDragDrop(New DataObject(DataFormats.FileDrop, _
+                files.ToArray()), DragDropEffects.Copy Or DragDropEffects.Move)
+        End If
+    End Sub
+
+    Private Async Sub btnCopy_Click(sender As Object, e As EventArgs) _
+    Handles btnCopy.Click
+        Try
+            For Each item As ListViewItem In lstFiles.SelectedItems
+                Dim source As String = item.Tag.ToString()
+                Dim dest As String = Path.Combine(txtDestination.Text, _
+                    item.Text)
+                
+                If File.Exists(source) Then
+                    Await Task.Run(Sub() File.Copy(source, dest, True))
+                ElseIf Directory.Exists(source) Then
+                    Await Task.Run(Sub() _
+                        My.Computer.FileSystem.CopyDirectory( _
+                            source, dest, True))
+                End If
+            Next
+            
+            Await LoadFilesAndFoldersAsync()
+            
+        Catch ex As Exception
+            MessageBox.Show("Error copying files: " & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub lstFiles_DragEnter(sender As Object, e As DragEventArgs) _
+    Handles lstFiles.DragEnter
+        If e.Data.GetDataPresent(DataFormats.FileDrop) Then
+            e.Effect = DragDropEffects.Copy
+        End If
+    End Sub
+
+    Private Async Sub lstFiles_DragDrop(sender As Object, e As DragEventArgs) _
+    Handles lstFiles.DragDrop
+        If e.Data.GetDataPresent(DataFormats.FileDrop) Then
+            Dim files() As String = _
+                DirectCast(e.Data.GetData(DataFormats.FileDrop), String())
+            
+            Try
+                For Each file In files
+                    Dim destPath As String = Path.Combine(CurrentPath, _
+                        Path.GetFileName(file))
+                    If File.Exists(file) Then
+                        Await Task.Run(Sub() _
+                            File.Copy(file, destPath, True))
+                    ElseIf Directory.Exists(file) Then
+                        Await Task.Run(Sub() _
+                            My.Computer.FileSystem.CopyDirectory( _
+                                file, destPath, True))
+                    End If
+                Next
+                
+                Await LoadFilesAndFoldersAsync()
+                
+            Catch ex As Exception
+                MessageBox.Show("Error processing dropped files: " & _
+                    ex.Message)
+            End Try
+        End If
+    End Sub
+End Class`
+      },
+      {
+        title: "Key Features",
+        content: "Core features of the file manager application",
+        list: [
+          "Asynchronous file operations",
+          "Drag & drop file management",
+          "File system monitoring",
+          "Progress reporting for large operations",
+          "Error handling and user feedback"
+        ]
+      }
+    ]
+  }
+];
+
+export function ProjectsModal({ isOpen, onClose }: ProjectsModalProps) {
+  const [activeProject, setActiveProject] = useState<number>(1);
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+      <div className="bg-gray-800 rounded-lg max-w-6xl w-full max-h-[90vh] overflow-y-auto">
+        <div className="p-6">
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-3xl font-bold text-blue-400">VB.NET Projects</h2>
+            <button 
+              onClick={onClose}
+              className="text-gray-400 hover:text-gray-300 text-2xl"
+            >
+              ✕
+            </button>
+          </div>
+
+          {/* Project Navigation */}
+          <div className="flex space-x-2 mb-6 overflow-x-auto pb-2">
+            {projects.map((project) => (
+              <button
+                key={project.id}
+                onClick={() => setActiveProject(project.id)}
+                className={`px-4 py-2 rounded-lg flex-shrink-0 ${
+                  activeProject === project.id
+                    ? 'bg-blue-500 text-white'
+                    : 'bg-gray-700 hover:bg-gray-600 text-gray-200'
+                }`}
+              >
+                {project.title}
+              </button>
+            ))}
+          </div>
+
+          {/* Content */}
+          <div className="space-y-6">
+            {projects[activeProject - 1]?.sections.map((section, index) => (
+              <section key={index} className="bg-gray-700 rounded-lg p-6">
+                <h3 className="text-2xl font-semibold text-blue-300 mb-4">{section.title}</h3>
+                <div className="space-y-4">
+                  <p className="text-gray-200">{section.content}</p>
+
+                  {section.description && (
+                    <div className="bg-gray-600 p-4 rounded-lg">
+                      <p className="text-gray-200">{section.description}</p>
+                    </div>
+                  )}
+
+                  {section.requirements && (
+                    <div>
+                      <h4 className="text-lg font-semibold text-blue-300 mb-2">Requirements:</h4>
+                      <ul className="list-disc pl-5 space-y-1 text-gray-200">
+                        {section.requirements.map((req, i) => (
+                          <li key={i}>{req}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {section.steps && (
+                    <div>
+                      <h4 className="text-lg font-semibold text-blue-300 mb-2">Steps:</h4>
+                      <ol className="list-decimal pl-5 space-y-1 text-gray-200">
+                        {section.steps.map((step, i) => (
+                          <li key={i}>{step}</li>
+                        ))}
+                      </ol>
+                    </div>
+                  )}
+
+                  {section.code && (
+                    <pre className="bg-gray-900 p-4 rounded-lg text-gray-100 text-sm overflow-x-auto">
+                      {section.code}
+                    </pre>
+                  )}
+
+                  {section.imagePath && (
+                    <div className="mt-4">
+                      <img 
+                        src={section.imagePath} 
+                        alt={section.title}
+                        className="rounded-lg shadow-md max-w-full h-auto"
+                      />
+                    </div>
+                  )}
+                </div>
+              </section>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

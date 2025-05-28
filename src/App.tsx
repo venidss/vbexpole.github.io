@@ -1,11 +1,15 @@
 import './App.css'
-import { useState } from 'react'
+import { useState, Suspense } from 'react'
 import { BasicConceptsModal } from './components/BasicConcepts'
 import { WindowsFormsModal } from './components/WindowsForms'
 import { ControlStructuresModal } from './components/ControlStructures'
 import { DatabaseProgrammingModal } from './components/DatabaseProgramming'
 import { FunctionsProceduresModal } from './components/FunctionsProcedures'
 import { DebuggingModal } from './components/Debugging'
+import { OOPConceptsModal } from './components/OOPConcepts'
+import { ProjectsModal } from './components/Projects'
+import ErrorBoundary from './components/ErrorBoundary'
+import LoadingSpinner from './components/LoadingSpinner'
 
 function App() {
   const [isBasicConceptsOpen, setIsBasicConceptsOpen] = useState(false)
@@ -14,91 +18,115 @@ function App() {
   const [isDatabaseProgrammingOpen, setIsDatabaseProgrammingOpen] = useState(false)
   const [isFunctionsProceduresOpen, setIsFunctionsProceduresOpen] = useState(false)
   const [isDebuggingOpen, setIsDebuggingOpen] = useState(false)
+  const [isOOPConceptsOpen, setIsOOPConceptsOpen] = useState(false)
+  const [isProjectsOpen, setIsProjectsOpen] = useState(false)
 
   return (
-    <div className="h-screen w-screen bg-gradient-to-br from-black-500 to-gray-1000 p-4 overflow-hidden">
-      <div className="h-full w-full">
-        <div className="text-center mb-8">
-          <h1 className="text-5xl font-bold text-white mb-2">VB.NET Learning Hub</h1>
-          <div className="animate-bounce text-yellow-300 text-2xl">🌟</div>
-        </div>
+    <ErrorBoundary>
+      <Suspense fallback={<div className="h-screen w-screen flex items-center justify-center"><LoadingSpinner size="large" /></div>}>
+        <div className="h-screen w-screen bg-gradient-to-br from-black-500 to-gray-1000 p-4 overflow-hidden">
+          <div className="h-full w-full">
+            <div className="text-center mb-8">
+              <h1 className="text-5xl font-bold text-white mb-2">VB.NET Learning Hub</h1>
+              <div className="animate-bounce text-yellow-300 text-2xl">🌟</div>
+            </div>
 
-        <div className="grid grid-cols-2 gap-8 px-16">
-          {/* Left Column */}
-          <div className="space-y-6">
-            <CategoryButton 
-              icon="📝" 
-              title="Basic Concepts" 
-              color="bg-green-400"
-              onClick={() => setIsBasicConceptsOpen(true)} 
+            <div className="grid grid-cols-2 gap-8 px-16">
+              {/* Left Column */}
+              <div className="space-y-6">
+                <CategoryButton 
+                  icon="📝" 
+                  title="Basic Concepts" 
+                  color="bg-green-400"
+                  onClick={() => setIsBasicConceptsOpen(true)} 
+                />
+                <CategoryButton 
+                  icon="🔄" 
+                  title="Control Structures" 
+                  color="bg-yellow-400"
+                  onClick={() => setIsControlStructuresOpen(true)}
+                />
+                <CategoryButton 
+                  icon="🎯" 
+                  title="Functions & Procedures" 
+                  color="bg-red-400"
+                  onClick={() => setIsFunctionsProceduresOpen(true)}
+                />
+                <CategoryButton 
+                  icon="🧰" 
+                  title="OOP Concepts" 
+                  color="bg-purple-400"
+                  onClick={() => setIsOOPConceptsOpen(true)}
+                />
+                <CategoryButton icon="📚" title="Libraries & Modules" color="bg-blue-400" />
+              </div>
+
+              {/* Right Column */}
+              <div className="space-y-6">
+                <CategoryButton 
+                  icon="🖥️" 
+                  title="Windows Forms" 
+                  color="bg-indigo-400"
+                  onClick={() => setIsWindowsFormsOpen(true)}
+                />
+                <CategoryButton 
+                  icon="🗃️" 
+                  title="Database Programming" 
+                  color="bg-pink-400"
+                  onClick={() => setIsDatabaseProgrammingOpen(true)}
+                />
+                <CategoryButton 
+                  icon="🔍" 
+                  title="Debugging" 
+                  color="bg-orange-400"
+                  onClick={() => setIsDebuggingOpen(true)}
+                />
+                <CategoryButton 
+                  icon="🛠️" 
+                  title="Projects" 
+                  color="bg-teal-400"
+                  onClick={() => setIsProjectsOpen(true)}
+                />
+                <CategoryButton icon="🎮" title="Practice Exercises" color="bg-cyan-400" />
+              </div>
+            </div>
+
+            <BasicConceptsModal 
+              isOpen={isBasicConceptsOpen}
+              onClose={() => setIsBasicConceptsOpen(false)}
             />
-            <CategoryButton 
-              icon="🔄" 
-              title="Control Structures" 
-              color="bg-yellow-400"
-              onClick={() => setIsControlStructuresOpen(true)}
+            <WindowsFormsModal
+              isOpen={isWindowsFormsOpen}
+              onClose={() => setIsWindowsFormsOpen(false)}
             />
-            <CategoryButton 
-              icon="🎯" 
-              title="Functions & Procedures" 
-              color="bg-red-400"
-              onClick={() => setIsFunctionsProceduresOpen(true)}
+            <ControlStructuresModal
+              isOpen={isControlStructuresOpen}
+              onClose={() => setIsControlStructuresOpen(false)}
             />
-            <CategoryButton icon="🧰" title="OOP Concepts" color="bg-purple-400" />
-            <CategoryButton icon="📚" title="Libraries & Modules" color="bg-blue-400" />
+            <DatabaseProgrammingModal
+              isOpen={isDatabaseProgrammingOpen}
+              onClose={() => setIsDatabaseProgrammingOpen(false)}
+            />
+            <FunctionsProceduresModal
+              isOpen={isFunctionsProceduresOpen}
+              onClose={() => setIsFunctionsProceduresOpen(false)}
+            />
+            <DebuggingModal
+              isOpen={isDebuggingOpen}
+              onClose={() => setIsDebuggingOpen(false)}
+            />
+            <OOPConceptsModal
+              isOpen={isOOPConceptsOpen}
+              onClose={() => setIsOOPConceptsOpen(false)}
+            />
+            <ProjectsModal
+              isOpen={isProjectsOpen}
+              onClose={() => setIsProjectsOpen(false)}
+            />
           </div>
-
-          {/* Right Column */}
-          <div className="space-y-6">
-            <CategoryButton 
-              icon="🖥️" 
-              title="Windows Forms" 
-              color="bg-indigo-400"
-              onClick={() => setIsWindowsFormsOpen(true)}
-            />
-            <CategoryButton 
-              icon="🗃️" 
-              title="Database Programming" 
-              color="bg-pink-400"
-              onClick={() => setIsDatabaseProgrammingOpen(true)}
-            />
-            <CategoryButton 
-              icon="🔍" 
-              title="Debugging" 
-              color="bg-orange-400"
-              onClick={() => setIsDebuggingOpen(true)}
-            />
-            <CategoryButton icon="🛠️" title="Projects" color="bg-teal-400" />
-            <CategoryButton icon="🎮" title="Practice Exercises" color="bg-cyan-400" />
-          </div>
         </div>
-
-        <BasicConceptsModal 
-          isOpen={isBasicConceptsOpen}
-          onClose={() => setIsBasicConceptsOpen(false)}
-        />
-        <WindowsFormsModal
-          isOpen={isWindowsFormsOpen}
-          onClose={() => setIsWindowsFormsOpen(false)}
-        />
-        <ControlStructuresModal
-          isOpen={isControlStructuresOpen}
-          onClose={() => setIsControlStructuresOpen(false)}
-        />
-        <DatabaseProgrammingModal
-          isOpen={isDatabaseProgrammingOpen}
-          onClose={() => setIsDatabaseProgrammingOpen(false)}
-        />
-        <FunctionsProceduresModal
-          isOpen={isFunctionsProceduresOpen}
-          onClose={() => setIsFunctionsProceduresOpen(false)}
-        />
-        <DebuggingModal
-          isOpen={isDebuggingOpen}
-          onClose={() => setIsDebuggingOpen(false)}
-        />
-      </div>
-    </div>
+      </Suspense>
+    </ErrorBoundary>
   )
 }
 

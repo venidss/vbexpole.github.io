@@ -11,97 +11,66 @@ interface PracticeResult {
   success: boolean;
 }
 
-interface VBFunction {
-  params: string[];
-  body: string;
-  returnType: string;
-}
-
 interface SimulationResult {
   features: string[];
   suggestions: string[];
 }
 
-// Helper functions
-function getLineNumber(index: number | undefined, code: string): number {
-  if (index === undefined) return 0;
-  return code.substring(0, index).split('\n').length;
-}
-
-function hasMatchingEnd(code: string, type: 'Function' | 'Sub', startIndex: number): boolean {
-  const endPattern = new RegExp(`End\\s+${type}`, 'i');
-  const codeAfterStart = code.substring(startIndex);
-  return endPattern.test(codeAfterStart);
-}
-
 function simulateBasics(code: string): SimulationResult {
-  const hasFunctionStructure = /Function\s+\w+\s*\([^)]*\)\s+As\s+\w+[\s\S]*?End\s+Function/i.test(code);
-  const hasSubStructure = /Sub\s+\w+\s*\([^)]*\)[\s\S]*?End\s+Sub/i.test(code);
-  const hasErrorHandling = /Try[\s\S]*?Catch[\s\S]*?End\s+Try/i.test(code);
-
-  return {
-    features: [
-      hasFunctionStructure ? '✓ Function declaration' : '✗ Missing Function declaration',
-      hasSubStructure ? '✓ Sub procedure' : '✗ Missing Sub procedure',
-      hasErrorHandling ? '✓ Error handling' : '✗ Missing error handling'
-    ],
-    suggestions: !hasErrorHandling ? ['Add Try-Catch blocks for error handling'] : []
-  };
+  const features = [];
+  const suggestions = [];
+  
+  if (code.includes('Function')) features.push('Function declaration');
+  if (code.includes('Sub')) features.push('Sub procedure declaration');
+  if (code.includes('Try')) features.push('Error handling');
+  if (code.includes('ByVal') || code.includes('ByRef')) features.push('Parameter passing');
+  
+  if (!code.includes('Try')) suggestions.push('Consider adding error handling');
+  if (!code.includes('ByVal') && !code.includes('ByRef')) suggestions.push('Specify parameter passing mode');
+  
+  return { features, suggestions };
 }
 
 function simulateFunctions(code: string): SimulationResult {
-  const hasReturnType = /Function\s+\w+\s*\([^)]*\)\s+As\s+\w+/i.test(code);
-  const hasParameterValidation = /If.*Throw\s+New\s+\w+Exception/i.test(code);
-  const hasReturn = /\bReturn\s+[^;\n]+/i.test(code);
-
-  return {
-    features: [
-      hasReturnType ? '✓ Return type declared' : '✗ Missing return type',
-      hasParameterValidation ? '✓ Parameter validation' : '✗ Missing parameter validation',
-      hasReturn ? '✓ Return statement present' : '✗ Missing return statement'
-    ],
-    suggestions: [
-      !hasParameterValidation ? 'Add input parameter validation' : '',
-      !hasReturn ? 'Include a Return statement' : ''
-    ].filter(Boolean)
-  };
+  const features = [];
+  const suggestions = [];
+  
+  if (code.includes('As ')) features.push('Return type specification');
+  if (code.includes('Return')) features.push('Return statement');
+  if (code.includes('Optional')) features.push('Optional parameters');
+  
+  if (!code.includes('Return')) suggestions.push('Add a return statement');
+  if (!code.includes('As ')) suggestions.push('Specify return type');
+  
+  return { features, suggestions };
 }
 
 function simulateProcedures(code: string): SimulationResult {
-  const hasVoidSub = /Sub\s+\w+\s*\([^)]*\)/i.test(code);
-  const hasParameterList = /Sub\s+\w+\s*\([\s\S]+?\)/i.test(code);
-  const hasConsoleOutput = /Console\.WriteLine/i.test(code);
-
-  return {
-    features: [
-      hasVoidSub ? '✓ Sub procedure declared' : '✗ Missing Sub declaration',
-      hasParameterList ? '✓ Parameters defined' : '✗ No parameters defined',
-      hasConsoleOutput ? '✓ Console output present' : '✗ No console output'
-    ],
-    suggestions: [
-      !hasVoidSub ? 'Declare a Sub procedure' : '',
-      !hasConsoleOutput ? 'Add some console output to demonstrate the procedure' : ''
-    ].filter(Boolean)
-  };
+  const features = [];
+  const suggestions = [];
+  
+  if (code.includes('ByRef')) features.push('Reference parameters');
+  if (code.includes('Exit Sub')) features.push('Early exit');
+  if (code.includes('RaiseEvent')) features.push('Event raising');
+  
+  if (!code.includes('Try')) suggestions.push('Consider adding error handling');
+  if (!code.includes('ByRef')) suggestions.push('Consider using ByRef for output parameters');
+  
+  return { features, suggestions };
 }
 
 function simulateAdvanced(code: string): SimulationResult {
-  const hasOverloading = /(Function|Sub)\s+(\w+)[\s\S]*?\2\s*\([^)]*\)/i.test(code);
-  const hasOptionalParams = /Optional\s+\w+\s+As\s+\w+\s*=\s*/i.test(code);
-  const hasParamArray = /ParamArray\s+\w+\(\)\s+As\s+\w+/i.test(code);
-
-  return {
-    features: [
-      hasOverloading ? '✓ Method overloading' : '✗ No method overloading',
-      hasOptionalParams ? '✓ Optional parameters' : '✗ No optional parameters',
-      hasParamArray ? '✓ ParamArray used' : '✗ No ParamArray'
-    ],
-    suggestions: [
-      !hasOverloading ? 'Try adding an overloaded method' : '',
-      !hasOptionalParams ? 'Add some optional parameters' : '',
-      !hasParamArray ? 'Use ParamArray for variable arguments' : ''
-    ].filter(Boolean)
-  };
+  const features = [];
+  const suggestions = [];
+  
+  if (code.includes('Overloads')) features.push('Function overloading');
+  if (code.includes('ParamArray')) features.push('Variable argument list');
+  if (code.includes('Generic')) features.push('Generic methods');
+  
+  if (!code.includes('XML')) suggestions.push('Add XML documentation');
+  if (!code.includes('Overloads')) suggestions.push('Consider overloading for flexibility');
+  
+  return { features, suggestions };
 }
 
 export function FunctionsProceduresModal({ isOpen, onClose }: FunctionsProceduresModalProps) {
